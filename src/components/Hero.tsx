@@ -63,7 +63,7 @@ const Hero: React.FC = () => {
     >
       {/* ReactBits Threads Background */}
       {isVisible && (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 md:hidden">
           <Threads 
             color={[0.89, 0.13, 0.98] as any} // #e421fc (neon-purple)
             amplitude={isLowPerformance ? 0.8 : 1.2}
