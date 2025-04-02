@@ -4,10 +4,32 @@ import { motion } from 'framer-motion';
 const About: React.FC = () => {
   return (
     <section id="about" className="py-20 relative overflow-hidden bg-primary/90">
-      {/* Cyberpunk background elements */}
+      {/* Enhanced Cyberpunk background elements */}
       <div className="absolute inset-0 cyber-grid opacity-10 z-0"></div>
-      <div className="absolute top-10 -left-20 w-40 h-40 bg-neon-purple/30 rounded-full filter blur-3xl opacity-20"></div>
-      <div className="absolute bottom-10 -right-20 w-60 h-60 bg-neon-blue/20 rounded-full filter blur-3xl opacity-20"></div>
+      
+      {/* Digital circuit lines */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute left-0 top-0 w-1/3 h-px bg-gradient-to-r from-neon-blue to-transparent opacity-30"></div>
+        <div className="absolute right-0 top-1/4 w-1/2 h-px bg-gradient-to-l from-neon-purple to-transparent opacity-30"></div>
+        <div className="absolute left-10 top-1/3 w-1/4 h-px bg-gradient-to-r from-neon-pink to-transparent opacity-20"></div>
+        <div className="absolute right-20 bottom-1/4 w-1/3 h-px bg-gradient-to-l from-neon-blue to-transparent opacity-30"></div>
+      </div>
+      
+      {/* Vertical data streams */}
+      <div className="absolute top-0 right-1/5 w-px h-1/3 bg-gradient-to-b from-transparent via-neon-blue to-transparent opacity-20"></div>
+      <div className="absolute top-1/4 left-1/4 w-px h-1/2 bg-gradient-to-b from-transparent via-neon-purple to-transparent opacity-15"></div>
+      <div className="absolute bottom-0 right-1/3 w-px h-1/3 bg-gradient-to-t from-transparent via-neon-pink to-transparent opacity-20"></div>
+      
+      {/* Ambient glow elements */}
+      <div className="absolute top-10 -left-20 w-40 h-40 bg-neon-purple/30 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+      <div className="absolute bottom-10 -right-20 w-60 h-60 bg-neon-blue/20 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-6xl bg-gradient-radial from-neon-purple/5 to-transparent opacity-20"></div>
+      
+      {/* Hexagon mesh pattern - subtle */}
+      <div className="absolute inset-0 hexagon-mesh opacity-5"></div>
+      
+      {/* Digital noise overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay"></div>
 
       {/* Decorative lines */}
       <div className="absolute left-0 top-1/3 h-px w-1/4 bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-50"></div>
@@ -36,9 +58,9 @@ const About: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="col-span-1 flex justify-center md:justify-end"
           >
-            <div className="relative">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto md:mx-0">
               <div className="absolute inset-0 rounded-lg border-2 border-neon-purple glow-sm"></div>
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden transform rotate-3 border-2 border-neon-blue relative z-10">
+              <div className="w-full h-full rounded-lg overflow-hidden transform rotate-3 border-2 border-neon-blue relative z-10">
                 <img 
                   src={require("../assets/images/profile-image.jpg")}
                   alt="Yong Wern Jie" 
@@ -61,7 +83,7 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="col-span-2 text-light/80 cyber-card p-6 border border-neon-purple/30"
+            className="col-span-2 text-light/80 cyber-card p-6 border border-neon-purple/30 backdrop-blur-sm bg-primary/70"
           >
             <div className="space-y-4 font-mono text-sm">
               <p className="leading-relaxed text-left">

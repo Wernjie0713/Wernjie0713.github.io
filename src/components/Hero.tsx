@@ -1,8 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import Threads from '../blocks/Backgrounds/Threads/Threads';
 
 const Hero: React.FC = () => {
   const glitchRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,15 +22,68 @@ const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Only render threads when hero section is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Trigger when at least 10% of the element is visible
+    );
+    
+    const currentRef = sectionRef.current;
+    
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+    
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  // Detect low performance devices to further reduce quality
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+  useEffect(() => {
+    // Simple performance detection
+    const isLowEnd = 
+      window.navigator.hardwareConcurrency <= 4 || 
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    setIsLowPerformance(isLowEnd);
+  }, []);
+
   return (
-    <section id="home" className="flex items-center justify-center min-h-screen pt-16 cyber-grid">
-      <div className="absolute top-0 left-0 w-full h-full opacity-10">
-        <div className="absolute top-[20%] right-[10%] w-32 h-32 bg-neon-purple rounded-full filter blur-[80px]"></div>
-        <div className="absolute bottom-[30%] left-[15%] w-40 h-40 bg-neon-blue rounded-full filter blur-[100px]"></div>
-        <div className="absolute bottom-[10%] right-[30%] w-28 h-28 bg-neon-purple rounded-full filter blur-[90px]"></div>
+    <section 
+      id="home" 
+      ref={sectionRef}
+      className="flex items-center justify-center min-h-screen pt-16 relative overflow-hidden"
+    >
+      {/* ReactBits Threads Background */}
+      {isVisible && (
+        <div className="absolute inset-0 z-0">
+          <Threads 
+            color={[0.89, 0.13, 0.98] as any} // #e421fc (neon-purple)
+            amplitude={isLowPerformance ? 0.8 : 1.2}
+            distance={0.5}
+            enableMouseInteraction={!isLowPerformance}
+          />
+        </div>
+      )}
+      
+      {/* Ambient glow for better contrast with the threads */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-[20%] right-[10%] w-32 h-32 bg-neon-purple rounded-full filter blur-[80px] opacity-30"></div>
+        <div className="absolute bottom-[30%] left-[15%] w-40 h-40 bg-neon-blue rounded-full filter blur-[100px] opacity-30"></div>
+        <div className="absolute bottom-[10%] right-[30%] w-28 h-28 bg-neon-purple rounded-full filter blur-[90px] opacity-30"></div>
       </div>
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+      {/* Semi-transparent overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-primary opacity-60 z-[1]"></div>
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
         <div className="text-center md:text-left relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,7 +141,7 @@ const Hero: React.FC = () => {
                 const element = document.getElementById('projects');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="relative px-6 py-3 overflow-hidden font-medium text-white bg-primary shadow-inner group w-full sm:w-auto text-center"
+              className="relative px-6 py-3 overflow-hidden font-medium text-white bg-primary shadow-inner group w-full sm:w-auto text-center backdrop-blur-sm bg-primary/40 border border-neon-purple/30"
             >
               <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-neon-purple to-neon-blue opacity-20 group-hover:opacity-40 transition-opacity duration-300"></span>
               <span className="absolute top-0 left-0 w-0 h-full bg-neon-purple group-hover:w-full transition-all duration-300 ease-out"></span>
@@ -101,7 +157,7 @@ const Hero: React.FC = () => {
                 const element = document.getElementById('contact');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium text-neon-purple transition duration-300 ease-out border border-neon-purple rounded-md shadow-md group w-full sm:w-auto"
+              className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium text-neon-purple transition duration-300 ease-out border border-neon-purple rounded-md shadow-md group w-full sm:w-auto backdrop-blur-sm bg-primary/40"
             >
               <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-neon-purple group-hover:translate-x-0 ease">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -115,20 +171,29 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-        <button
+      {/* Futuristic UI elements to complement the threads background */}
+      <div className="absolute bottom-10 left-0 right-0 flex justify-center z-10">
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
           onClick={() => {
             const element = document.getElementById('about');
             element?.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="animate-bounce"
+          className="animate-bounce backdrop-blur-sm bg-primary/30 p-2 rounded-full border border-neon-purple/30 hover:bg-primary/50 transition-all duration-300"
         >
           <svg className="w-6 h-6 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
-        </button>
+        </motion.button>
       </div>
+      
+      {/* Cyberpunk UI accent elements */}
+      <div className="absolute top-10 left-10 w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
+      <div className="absolute top-10 left-10 w-px h-32 bg-neon-blue opacity-50 z-[1]"></div>
+      <div className="absolute bottom-10 right-10 w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
+      <div className="absolute bottom-10 right-10 w-px h-32 bg-neon-blue opacity-50 z-[1]"></div>
     </section>
   );
 };

@@ -40,9 +40,18 @@ function App() {
 
   return (
     <Router>
-      <div className="App min-h-screen bg-primary">
+      <div className="App min-h-screen bg-primary relative overflow-hidden">
+        {/* Global cyberpunk background elements */}
+        <div className="fixed inset-0 cyber-grid opacity-10 z-0 pointer-events-none"></div>
+        <div className="fixed inset-0 hexagon-mesh opacity-[0.03] z-0 pointer-events-none"></div>
+        <div className="fixed inset-0 bg-noise opacity-[0.02] mix-blend-overlay z-0 pointer-events-none"></div>
+        
+        {/* Ambient global glow effects */}
+        <div className="fixed -top-40 -left-40 w-80 h-80 bg-neon-purple/10 rounded-full filter blur-[100px] opacity-30 z-0 pointer-events-none"></div>
+        <div className="fixed -bottom-40 -right-40 w-80 h-80 bg-neon-blue/10 rounded-full filter blur-[100px] opacity-30 z-0 pointer-events-none"></div>
+
         <Navbar />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <Routes>
             <Route path="/" element={
               <>
