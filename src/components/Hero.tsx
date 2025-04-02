@@ -190,10 +190,10 @@ const Hero: React.FC = () => {
       </div>
       
       {/* Cyberpunk UI accent elements */}
-      <div className="absolute top-10 left-10 w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
-      <div className="absolute top-10 left-10 w-px h-32 bg-neon-blue opacity-50 z-[1]"></div>
-      <div className="absolute bottom-10 right-10 w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
-      <div className="absolute bottom-10 right-10 w-px h-32 bg-neon-blue opacity-50 z-[1]"></div>
+      <div className="absolute top-20 md:top-28 left-4 md:left-10 w-20 md:w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
+      <div className="absolute top-20 md:top-28 left-4 md:left-10 w-px h-20 md:h-32 bg-neon-blue opacity-50 z-[1]"></div>
+      <div className="absolute bottom-10 right-4 md:right-10 w-20 md:w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
+      <div className="absolute bottom-10 right-4 md:right-10 w-px h-20 md:h-32 bg-neon-blue opacity-50 z-[1]"></div>
     </section>
   );
 };

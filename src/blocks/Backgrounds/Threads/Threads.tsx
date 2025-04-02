@@ -34,8 +34,7 @@ uniform vec2 uMouse;
 
 #define PI 3.1415926538
 
-// Reduced line count from 40 to 25 for better performance
-const int u_line_count = 25;
+const int u_line_count = 40;
 const float u_line_width = 7.0;
 const float u_line_blur = 10.0;
 
@@ -130,7 +129,7 @@ void main() {
 }
 `;
 
-const Threads: React.FC<ThreadsProps & React.HTMLAttributes<HTMLDivElement>> = ({
+const Threads: React.FC<ThreadsProps> = ({
   color = [1, 1, 1],
   amplitude = 1,
   distance = 0,
@@ -149,7 +148,7 @@ const Threads: React.FC<ThreadsProps & React.HTMLAttributes<HTMLDivElement>> = (
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    (container as any).appendChild(gl.canvas);
+    container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
@@ -214,38 +213,31 @@ const Threads: React.FC<ThreadsProps & React.HTMLAttributes<HTMLDivElement>> = (
       program.uniforms.iTime.value = t * 0.001;
 
       renderer.render({ scene: mesh });
-      
-      // Performance optimizations for animation timing
-      const requestNextFrame = () => {
-        animationFrameId.current = requestAnimationFrame(update);
-      };
-      
-      if (window.navigator.hardwareConcurrency <= 4) {
-        // Limit to ~30fps on lower-end devices
-        setTimeout(requestNextFrame, 33);
-      } else {
-        requestNextFrame();
-      }
+      animationFrameId.current = requestAnimationFrame(update);
     }
-    
-    // Start the animation loop
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
-      if (animationFrameId.current)
+      if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
+      }
       window.removeEventListener("resize", resize);
 
+      const currentContainer = containerRef.current;
+      if (!currentContainer) return;
+
       if (enableMouseInteraction) {
-        container.removeEventListener("mousemove", handleMouseMove);
-        container.removeEventListener("mouseleave", handleMouseLeave);
+        currentContainer.removeEventListener("mousemove", handleMouseMove);
+        currentContainer.removeEventListener("mouseleave", handleMouseLeave);
       }
-      if ((container as any).contains(gl.canvas)) {
-        (container as any).removeChild(gl.canvas);
+
+      if (gl?.canvas && currentContainer && typeof currentContainer.contains === 'function') {
+        currentContainer.removeChild(gl.canvas);
       }
-      const loseContextExt = gl.getExtension("WEBGL_lose_context");
-      if (loseContextExt && 'loseContext' in loseContextExt) {
-        (loseContextExt as any).loseContext();
+      
+      const ext = gl.getExtension('WEBGL_lose_context');
+      if (ext && typeof ext.loseContext === 'function') {
+        ext.loseContext();
       }
     };
   }, [color, amplitude, distance, enableMouseInteraction]);
