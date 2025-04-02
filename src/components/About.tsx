@@ -63,36 +63,48 @@ const About: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="col-span-2 text-light/80 cyber-card p-6 border border-neon-purple/30"
           >
-            <div className="space-y-4 font-mono text-sm text-justify">
-              <p className="leading-relaxed">
-                <span className="text-neon-purple font-cyber">$&gt;</span> <span className="text-neon-blue">Hello</span>! I'm Yong Wern Jie, a Computer Science (Data Engineering) student at Universiti Teknologi Malaysia (UTM) with a deep interest in full-stack development, AI integration, and building real-world, impactful web systems.
-              </p>
-              <p className="leading-relaxed">
-                <span className="text-neon-purple font-cyber">&lt;experience&gt;</span> Over the past year, I've gained hands-on experience through industry collaborations and technical projects. As the <span className="text-neon-blue">Lead Programmer</span> at Nexscholar Sdn. Bhd., I've been involved in building web platforms from the ground up, integrating AI features, and working directly with founders and stakeholders to solve real business problems.
-              </p>
-              <p className="leading-relaxed">
-                <span className="text-neon-purple font-cyber">&lt;expertise&gt;</span> My core strengths include:
-                <br />• Full-Stack Web Development using <span className="text-neon-pink">Laravel, React.js, Vue.js, Astro & MySQL</span>
-                <br />• AI & Data Integration – from chatbots to OCR, enabling smart, responsive systems
-                <br />• Industry Collaboration through UTM's 2U2I Work-Based Learning Program
-                <br />• Team Leadership – currently serving as President of the Flying Dance Studio Club at UTM
-              </p>
+            <div className="space-y-4 font-mono text-sm">
               <p className="leading-relaxed text-left">
-                <span className="text-neon-purple font-cyber">&lt;achievements&gt;</span> Recent highlights include:
-                <br />• <span className="text-neon-blue">Champion</span> – Cisco AI Hackathon 2024
-                <br />• <span className="text-neon-blue">2nd Place</span> – PayNet Digital Campus 3.0 (Student Councils Category) & Youth Venture Asia Industry Project
-                <br />• <span className="text-neon-blue">Special Award</span> – PayNet Digital Campus 3.0 (University Category) - UTM's Digital Campus transformation (2M+ transactions logged)
+                <span className="text-neon-purple font-cyber">$&gt;</span> Computer Science (Data Engineering) student at UTM with expertise in full-stack development and AI integration. Currently serving as <span className="text-neon-blue">Lead Programmer</span> at Nexscholar Sdn. Bhd., focused on building innovative web platforms that solve real business challenges.
               </p>
-              <p className="leading-relaxed">
-                <span className="text-neon-purple font-cyber">$&gt; </span>I'm always exploring new tools and ideas in web development, AI, data engineering and digital innovation—and looking forward to opportunities that allow me to build, learn, and grow. Let's connect and create something amazing together!
+              
+              <p className="leading-relaxed text-left">
+                <span className="text-neon-purple font-cyber">&lt;tech_stack&gt;</span>
+                <br />• <span className="text-neon-pink">Backend:</span> Laravel, Node.js, MySQL
+                <br />• <span className="text-neon-pink">Frontend:</span> React.js, Vue.js, Astro, TailwindCSS
+                <br />• <span className="text-neon-pink">AI/Data:</span> Machine Learning Integration, OCR Systems, Data Analytics
+                <br />• <span className="text-neon-pink">Leadership:</span> Project Management, Team Coordination, Client Communication
+              </p>
+              
+              <p className="leading-relaxed text-left">
+                <span className="text-neon-purple font-cyber">&lt;key_achievements&gt;</span>
+                <br />• <span className="text-neon-blue">Champion</span> – Cisco AI Hackathon 2024
+                <br />• <span className="text-neon-blue">2nd Place</span> – PayNet Digital Campus 3.0 & Youth Venture Asia Industry Project
+                <br />• <span className="text-neon-blue">Special Award</span> – UTM's Digital Campus transformation (2M+ transactions)
+                <br />• President of Flying Dance Studio Club at UTM
+              </p>
+              
+              <p className="leading-relaxed text-left">
+                <span className="text-neon-purple font-cyber">$&gt; </span>Passionate about building robust, scalable web systems that deliver real-world impact. Currently exploring opportunities at the intersection of web development, AI, and data engineering.
               </p>
             </div>
             
-            <div className="mt-6 flex justify-start">
+            <div className="mt-6 flex justify-center">
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector('#contact');
+                  if (element) {
+                    const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                      top: offsetTop - 80,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className="group relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-primary border border-neon-purple rounded-md hover:bg-gray-900 transition-all duration-300"
               >
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-neon-purple rounded-full group-hover:w-full group-hover:h-56 opacity-10"></span>

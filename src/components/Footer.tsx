@@ -1,8 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const RESUME_URL = 'https://drive.google.com/file/d/1VVZ1_Jbo4hWY4xDZo4GvtuLWAajG2QYY/view?usp=sharing';
+
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    const element = document.querySelector(path);
+    if (element) {
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <motion.footer
@@ -17,7 +31,7 @@ const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#home" className="text-xl font-bold text-neon-purple neon-text font-cyber">
+            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="text-xl font-bold text-neon-purple neon-text font-cyber">
               <span className="inline-block">&lt;WJ/&gt;</span>
             </a>
             <p className="text-light/60 text-sm mt-2 font-mono">
@@ -31,7 +45,7 @@ const Footer: React.FC = () => {
                 href="https://www.linkedin.com/in/yong-wern-jie-0a5b90261/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-light/60 hover:text-neon-purple transition-colors"
+                className="text-light/60 hover:text-neon-purple transition-colors group"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +56,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/wernjie0713"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-light/60 hover:text-neon-purple transition-colors"
+                className="text-light/60 hover:text-neon-purple transition-colors group"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -51,11 +65,22 @@ const Footer: React.FC = () => {
               </a>
               <a
                 href="mailto:yongwernjie.2003@gmail.com"
-                className="text-light/60 hover:text-neon-purple transition-colors"
+                className="text-light/60 hover:text-neon-purple transition-colors group"
                 aria-label="Email"
               >
                 <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                </svg>
+              </a>
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-light/60 hover:text-neon-purple transition-colors group"
+                aria-label="Resume"
+              >
+                <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/>
                 </svg>
               </a>
             </div>
@@ -64,6 +89,7 @@ const Footer: React.FC = () => {
                 <a 
                   key={index} 
                   href={`#${item.toLowerCase()}`}
+                  onClick={(e) => handleNavClick(e, `#${item.toLowerCase()}`)}
                   className="hover:text-neon-purple transition-colors font-mono relative group"
                 >
                   <span className="relative z-10">{item}</span>

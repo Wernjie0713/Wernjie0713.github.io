@@ -107,7 +107,7 @@ const ProjectCard: React.FC<{ project: Project; isHighlighted?: boolean }> = ({ 
         </div>
       </div>
       <div className="p-6 bg-cyber-dark flex flex-col h-[280px]">
-        <p className="text-light/70 text-sm line-clamp-4">
+        <p className="text-light/70 text-sm line-clamp-4  ">
           {project.description}
         </p>
         <div className="mt-auto">
