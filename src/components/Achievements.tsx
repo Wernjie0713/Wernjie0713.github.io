@@ -100,9 +100,9 @@ const Achievements: React.FC = () => {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-blue"></div>
                 
                 <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                     <span className="font-cyber text-neon-purple text-3xl">{achievement.year}</span>
-                    <div className="px-3 py-1 bg-neon-purple/10 border border-neon-purple/30 rounded text-neon-purple text-sm font-mono">
+                    <div className="px-3 py-1 bg-neon-purple/10 border border-neon-purple/30 rounded text-neon-purple text-sm font-mono text-center sm:text-left w-full sm:w-auto">
                       {achievement.title}
                     </div>
                   </div>
