@@ -101,8 +101,8 @@ const About: React.FC = () => {
               <p className="leading-relaxed text-left">
                 <span className="text-neon-purple font-cyber">&lt;key_achievements&gt;</span>
                 <br />• <span className="text-neon-blue">Champion</span> – Cisco AI Hackathon 2024
-                <br />• <span className="text-neon-blue">2nd Place</span> – PayNet Digital Campus 3.0 & Youth Venture Asia Industry Project
-                <br />• <span className="text-neon-blue">Special Award</span> – UTM's Digital Campus transformation (2M+ transactions)
+                <br />• <span className="text-neon-blue">2nd Place</span> – PayNet Digital Campus 3.0 (Student Councils Category) & Youth Venture Asia Industry Project
+                <br />• <span className="text-neon-blue">Special Award</span> – PayNet Digital Campus 3.0 (University Category) - UTM's Digital Campus transformation (2M+ transactions)
                 <br />• President of Flying Dance Studio Club at UTM
               </p>
               
