@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './App.css';
+import { initGA, logPageView } from './utils/analytics';
 
 // Component imports
 import Navbar from './components/Navbar';
@@ -17,6 +18,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Initialize Google Analytics
+    initGA();
+    logPageView();
+
     // Simulate loading
     setTimeout(() => {
       setLoading(false);

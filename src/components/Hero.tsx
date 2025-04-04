@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Threads from '../blocks/Backgrounds/Threads/Threads';
+import { logButtonClick } from '../utils/analytics';
 
 const Hero: React.FC = () => {
   const glitchRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,24 @@ const Hero: React.FC = () => {
     
     setIsLowPerformance(isLowEnd);
   }, []);
+
+  const handleViewWorkClick = () => {
+    logButtonClick('View My Work');
+    const element = document.getElementById('projects');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactClick = () => {
+    logButtonClick('Contact Me');
+    const element = document.getElementById('contact');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleScrollToAbout = () => {
+    logButtonClick('Scroll to About');
+    const element = document.getElementById('about');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section 
@@ -137,10 +156,7 @@ const Hero: React.FC = () => {
             className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
           >
             <button
-              onClick={() => {
-                const element = document.getElementById('projects');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={handleViewWorkClick}
               className="relative px-6 py-3 overflow-hidden font-medium text-white bg-primary shadow-inner group w-full sm:w-auto text-center backdrop-blur-sm bg-primary/40 border border-neon-purple/30"
             >
               <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-neon-purple to-neon-blue opacity-20 group-hover:opacity-40 transition-opacity duration-300"></span>
@@ -153,10 +169,7 @@ const Hero: React.FC = () => {
               </span>
             </button>
             <button
-              onClick={() => {
-                const element = document.getElementById('contact');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={handleContactClick}
               className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium text-neon-purple transition duration-300 ease-out border border-neon-purple rounded-md shadow-md group w-full sm:w-auto backdrop-blur-sm bg-primary/40"
             >
               <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-neon-purple group-hover:translate-x-0 ease">
@@ -177,10 +190,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          onClick={() => {
-            const element = document.getElementById('about');
-            element?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onClick={handleScrollToAbout}
           className="animate-bounce backdrop-blur-sm bg-primary/30 p-2 rounded-full border border-neon-purple/30 hover:bg-primary/50 transition-all duration-300"
         >
           <svg className="w-6 h-6 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
