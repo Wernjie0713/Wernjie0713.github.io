@@ -11,7 +11,7 @@ const navLinks = [
   { name: 'Contact', path: '#contact' },
 ];
 
-const RESUME_URL = 'https://drive.google.com/file/d/1VVZ1_Jbo4hWY4xDZo4GvtuLWAajG2QYY/view?usp=sharing';
+const RESUME_URL = 'https://drive.google.com/file/d/1t0YmOis25FBo7683bF-LPX-UDK5vv1XL/view?usp=sharing';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

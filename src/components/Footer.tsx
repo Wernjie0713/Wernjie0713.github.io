@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const RESUME_URL = 'https://drive.google.com/file/d/1VVZ1_Jbo4hWY4xDZo4GvtuLWAajG2QYY/view?usp=sharing';
+const RESUME_URL = 'https://drive.google.com/file/d/1t0YmOis25FBo7683bF-LPX-UDK5vv1XL/view?usp=sharing';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
