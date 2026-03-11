@@ -3,39 +3,45 @@ import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
 const skills = [
-  { name: 'React', icon: 'vscode-icons:file-type-reactjs', category: 'Frontend' },
-  { name: 'Vue.js', icon: 'vscode-icons:file-type-vue', category: 'Frontend' },
-  { name: 'TailwindCSS', icon: 'vscode-icons:file-type-tailwind', category: 'Frontend' },
-  { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official', category: 'Frontend' },
-  { name: 'TypeScript', icon: 'vscode-icons:file-type-typescript-official', category: 'Frontend' },
-  { name: 'HTML', icon: 'vscode-icons:file-type-html', category: 'Frontend' },
-  { name: 'CSS', icon: 'vscode-icons:file-type-css', category: 'Frontend' },
-  { name: 'Node.js', icon: 'vscode-icons:file-type-node', category: 'Backend' },
-  { name: 'PHP', icon: 'vscode-icons:file-type-php', category: 'Backend' },
-  { name: 'Laravel', icon: 'logos:laravel', category: 'Backend' },
-  { name: 'MySQL', icon: 'vscode-icons:file-type-mysql', category: 'Database' },
-  { name: 'Git', icon: 'vscode-icons:file-type-git', category: 'Tools' },
-  { name: 'GitHub', icon: 'akar-icons:github-fill', category: 'Tools' },
-  { name: 'VS Code', icon: 'vscode-icons:file-type-vscode', category: 'Tools' },
-  { name: 'Cursor', icon: 'cursor-icon.svg', category: 'Tools', isImage: true },
-  { name: 'ChatGPT', icon: 'simple-icons:openai', category: 'Tools' },
-  { name: 'Claude', icon: 'simple-icons:anthropic', category: 'Tools' },
-  { name: 'OCR', icon: 'mdi:text-recognition', category: 'Tools' },
+  // Data Engineering
+  { name: 'Python', icon: 'logos:python', category: 'Data Engineering' },
+  { name: 'SQL', icon: 'vscode-icons:file-type-sql', category: 'Data Engineering' },
+  { name: 'ETL', icon: 'carbon:data-format', category: 'Data Engineering' },
+  { name: 'Data Warehousing', icon: 'carbon:data-base', category: 'Data Engineering' },
+  { name: 'FastAPI', icon: 'simple-icons:fastapi', category: 'Data Engineering' },
+  { name: 'Reporting Automation', icon: 'carbon:report', category: 'Data Engineering' },
+  { name: 'Data Validation', icon: 'carbon:data-check', category: 'Data Engineering' },
+  { name: 'Reconciliation', icon: 'carbon:compare', category: 'Data Engineering' },
+
+  // Backend & Full-Stack
+  { name: 'Laravel', icon: 'logos:laravel', category: 'Backend & Full-Stack' },
+  { name: 'React', icon: 'vscode-icons:file-type-reactjs', category: 'Backend & Full-Stack' },
+  { name: 'Vue.js', icon: 'vscode-icons:file-type-vue', category: 'Backend & Full-Stack' },
+  { name: 'TypeScript', icon: 'vscode-icons:file-type-typescript-official', category: 'Backend & Full-Stack' },
+  { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official', category: 'Backend & Full-Stack' },
+  { name: 'PHP', icon: 'vscode-icons:file-type-php', category: 'Backend & Full-Stack' },
+  { name: 'Tailwind CSS', icon: 'vscode-icons:file-type-tailwind', category: 'Backend & Full-Stack' },
+  { name: '.NET', icon: 'logos:dotnet', category: 'Backend & Full-Stack' },
+
+  // AI & Intelligent Systems
+  { name: 'OpenAI API', icon: 'simple-icons:openai', category: 'AI & Intelligent Systems' },
+  { name: 'Retrieval-Augmented Generation (RAG)', icon: 'carbon:machine-learning', category: 'AI & Intelligent Systems' },
+  { name: 'Qdrant', icon: 'logos:qdrant', category: 'AI & Intelligent Systems' },
+  { name: 'Semantic Matching', icon: 'carbon:machine-learning-model', category: 'AI & Intelligent Systems' },
+  { name: 'Azure OCR', icon: 'mdi:microsoft-azure', category: 'AI & Intelligent Systems' },
+
+  // Databases & Analytics
+  { name: 'MySQL', icon: 'vscode-icons:file-type-mysql', category: 'Databases & Analytics' },
+  { name: 'SQL Server', icon: 'devicon:microsoftsqlserver', category: 'Databases & Analytics' },
+  { name: 'Supabase', icon: 'logos:supabase-icon', category: 'Databases & Analytics' },
+  { name: 'Power BI', icon: 'logos:microsoft-power-bi', category: 'Databases & Analytics' },
+  { name: 'Tableau', icon: 'logos:tableau', category: 'Databases & Analytics' },
 ];
 
-const categories = ['Frontend', 'Backend', 'Database', 'Tools'];
+const categories = ['Data Engineering', 'Backend & Full-Stack', 'AI & Intelligent Systems', 'Databases & Analytics'];
 
 const Skills: React.FC = () => {
   const renderSkillIcon = (skill: typeof skills[0]) => {
-    if (skill.isImage) {
-      return (
-        <img 
-          src={`${process.env.PUBLIC_URL}/images/${skill.icon}`}
-          alt={skill.name} 
-          className="w-8 h-8 object-contain filter brightness-200" 
-        />
-      );
-    }
     return (
       <Icon 
         icon={skill.icon} 

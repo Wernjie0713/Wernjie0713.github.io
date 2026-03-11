@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { RESUME_URL } from '../constants';
 
 const navLinks = [
   { name: 'Home', path: '#home' },
   { name: 'About', path: '#about' },
+  { name: 'Experience', path: '#experience' },
   { name: 'Skills', path: '#skills' },
   { name: 'Projects', path: '#projects' },
   { name: 'Achievements', path: '#achievements' },
   { name: 'Contact', path: '#contact' },
 ];
-
-const RESUME_URL = 'https://drive.google.com/file/d/1t0YmOis25FBo7683bF-LPX-UDK5vv1XL/view?usp=sharing';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

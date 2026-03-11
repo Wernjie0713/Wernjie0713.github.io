@@ -12,31 +12,67 @@ interface Achievement {
 const achievements: Achievement[] = [
   {
     id: 1,
-    title: '2nd Place (Student Councils Category)',
-    organization: 'PayNet Digital Campus 3.0',
-    description: 'Created UTMDuitNow, a cashless transaction system featuring OCR and secure logging capabilities.',
+    title: 'Champion',
+    organization: 'InnovHack 2025',
+    description:
+      'Won 1st Place at InnovHack 2025 for developing EQ-View, an AI-powered platform designed to help students improve interview performance through multimodal AI, real-time analysis, and privacy-first design.',
     year: 2025
   },
   {
     id: 2,
-    title: 'Special Award (University Category)',
-    organization: 'PayNet Digital Campus 3.0',
-    description: 'Recognized for innovative technology implementation that enhanced campus digital services.',
+    title: '2nd Place - University Category',
+    organization: 'PayNet Digital Campus 4.0',
+    description:
+      'Secured 2nd Place in the University Category at PayNet Digital Campus 4.0, competing against 44 universities nationwide through the UTM DuitNow initiative.',
     year: 2025
   },
   {
     id: 3,
-    title: 'Champion',
-    organization: 'Cisco AI Hackathon 2024',
-    description: 'Developed AIcademy, an AI-powered learning platform with chatbot and gamification features.',
-    year: 2024
+    title: '2nd Place - Student Category',
+    organization: 'PayNet Digital Campus 4.0',
+    description:
+      'Secured 2nd Place in the Student Category at PayNet Digital Campus 4.0 through the UTM DuitNow initiative, contributing to campus-level digital payment transformation.',
+    year: 2025
   },
   {
     id: 4,
+    title: 'Gold Award',
+    organization: 'INATEX 2025',
+    description:
+      'Awarded to Nexscholar at INATEX 2025 for innovation in AI-driven academic collaboration, data analytics, and research ecosystem development.',
+    year: 2025
+  },
+  {
+    id: 5,
     title: '2nd Place',
-    organization: 'Youth Venture Asia System Development Project',
-    description: 'Developed YV Track, a student development tracking platform focusing on skills and growth metrics.',
+    organization: 'SEA-CICSIS 2025',
+    description:
+      'Secured 2nd Place at SEA-CICSIS 2025 for presenting Nexscholar as an innovation-driven academic platform focused on collaboration and research ecosystem development.',
+    year: 2025
+  },
+  {
+    id: 6,
+    title: '2nd Place',
+    organization: 'UTM-UMK Datathon 2025',
+    description:
+      'Secured 2nd Place in UTM-UMK Datathon 2025 through strong data analysis, visualization, and insight communication.',
+    year: 2025
+  },
+  {
+    id: 7,
+    title: 'Champion',
+    organization: 'Cisco AI Hackathon 2024',
+    description:
+      'Won 1st Place for developing AIcademy, an AI-powered learning platform designed to improve academic engagement and reduce procrastination.',
     year: 2024
+  },
+  {
+    id: 8,
+    title: '2nd Place & Special Award',
+    organization: 'PayNet Digital Campus 3.0',
+    description:
+      'Recognized for contributing to UTM DuitNow, a transaction platform built to support campus-wide digital payment adoption through OCR-assisted transaction recording and reporting.',
+    year: 2025
   }
 ];
 

@@ -62,7 +62,7 @@ const About: React.FC = () => {
               <div className="absolute inset-0 rounded-lg border-2 border-neon-purple glow-sm"></div>
               <div className="w-full h-full rounded-lg overflow-hidden transform rotate-3 border-2 border-neon-blue relative z-10">
                 <img 
-                  src={require("../assets/images/profile-image.jpg")}
+                  src={require("../assets/images/profile_image.jpeg")}
                   alt="Yong Wern Jie" 
                   className="w-full h-full object-cover"
                 />
@@ -85,29 +85,32 @@ const About: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="col-span-2 text-light/80 cyber-card p-6 border border-neon-purple/30 backdrop-blur-sm bg-primary/70"
           >
-            <div className="space-y-4 font-mono text-sm">
-              <p className="leading-relaxed text-left">
-                <span className="text-neon-purple font-cyber">$&gt;</span> Computer Science (Data Engineering) student at UTM with expertise in full-stack development and AI integration. Currently serving as <span className="text-neon-blue">Lead Programmer</span> at Nexscholar Sdn. Bhd., focused on building innovative web platforms that solve real business challenges.
+            <div className="space-y-4 font-mono text-sm leading-relaxed text-left">
+              <p>
+                <span className="text-neon-purple font-cyber">$&gt;</span> Computer Science (Data Engineering) student at UTM with hands-on experience building production-grade analytics platforms, AI-powered applications, and full-stack systems. Currently serving as Data Engineering Intern at Marrybrown and Senior System Developer at Nexscholar, focused on solving real business problems through scalable architecture, data validation, and intelligent automation.
               </p>
               
-              <p className="leading-relaxed text-left">
+              <p>
                 <span className="text-neon-purple font-cyber">&lt;tech_stack&gt;</span>
-                <br />• <span className="text-neon-pink">Backend:</span> Laravel, Node.js, MySQL
-                <br />• <span className="text-neon-pink">Frontend:</span> React.js, Vue.js, Astro, TailwindCSS
-                <br />• <span className="text-neon-pink">AI/Data:</span> Machine Learning Integration, OCR Systems, Data Analytics
-                <br />• <span className="text-neon-pink">Leadership:</span> Project Management, Team Coordination, Client Communication
+                <br />• <span className="text-neon-pink">Data Engineering:</span> ETL Design, Data Warehousing, SQL, Data Validation, Reporting Systems
+                <br />• <span className="text-neon-pink">Backend & Full-Stack:</span> Laravel, FastAPI, React.js, Inertia.js, MySQL, Supabase
+                <br />• <span className="text-neon-pink">AI Systems:</span> OpenAI API, RAG Architecture, Qdrant, Semantic Matching, Azure OCR
+                <br />• <span className="text-neon-pink">Analytics & BI:</span> Power BI, Tableau, Reporting Automation, Reconciliation Workflows
               </p>
               
-              <p className="leading-relaxed text-left">
+              <p>
                 <span className="text-neon-purple font-cyber">&lt;key_achievements&gt;</span>
-                <br />• <span className="text-neon-blue">Champion</span> – Cisco AI Hackathon 2024
-                <br />• <span className="text-neon-blue">2nd Place</span> – PayNet Digital Campus 3.0 (Student Councils Category) & Youth Venture Asia Industry Project
-                <br />• <span className="text-neon-blue">Special Award</span> – PayNet Digital Campus 3.0 (University Category) - UTM's Digital Campus transformation (2M+ transactions)
-                <br />• President of Flying Dance Studio Club at UTM
+                <br />• <span className="text-neon-blue">Champion</span> — InnovHack 2025
+                <br />• <span className="text-neon-blue">Champion</span> — Cisco AI Hackathon 2024
+                <br />• <span className="text-neon-blue">Gold Award</span> — INATEX 2025
+                <br />• <span className="text-neon-blue">2nd Place</span> — SEA-CICSIS 2025
+                <br />• <span className="text-neon-blue">2nd Place</span> — UTM-UMK Datathon 2025
+                <br />• <span className="text-neon-blue">2nd Place</span> — PayNet Digital Campus 4.0 (University & Student Categories)
+                <br />• <span className="text-neon-blue">2nd Place & Special Award</span> — PayNet Digital Campus 3.0
               </p>
               
-              <p className="leading-relaxed text-left">
-                <span className="text-neon-purple font-cyber">$&gt; </span>Passionate about building robust, scalable web systems that deliver real-world impact. Currently exploring opportunities at the intersection of web development, AI, and data engineering.
+              <p>
+                <span className="text-neon-purple font-cyber">$&gt; </span>Passionate about building reliable systems that connect data, software, and decision-making — especially across analytics engineering, AI integration, and production-scale internal platforms.
               </p>
             </div>
             

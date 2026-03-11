@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Icon } from '@iconify/react';
 import Threads from '../blocks/Backgrounds/Threads/Threads';
+import CircularText from './CircularText';
+import ShinyText from './ShinyText';
+import LogoLoop from './LogoLoop';
 import { logButtonClick } from '../utils/analytics';
 
 const Hero: React.FC = () => {
@@ -74,14 +78,32 @@ const Hero: React.FC = () => {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const techLogos = [
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:python" className="text-3xl" /> <span className="text-xl font-bold font-mono">Python</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="devicon:microsoftsqlserver" className="text-3xl" /> <span className="text-xl font-bold font-mono">SQL Server</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="vscode-icons:file-type-mysql" className="text-3xl" /> <span className="text-xl font-bold font-mono">MySQL</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="carbon:data-format" className="text-3xl text-neon-blue" /> <span className="text-xl font-bold font-mono">ETL/ELT</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="carbon:data-base" className="text-3xl text-neon-purple" /> <span className="text-xl font-bold font-mono">Data Warehousing</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="simple-icons:fastapi" className="text-3xl text-[#009688]" /> <span className="text-xl font-bold font-mono">FastAPI</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:supabase-icon" className="text-3xl" /> <span className="text-xl font-bold font-mono">Supabase</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:microsoft-power-bi" className="text-3xl" /> <span className="text-xl font-bold font-mono">Power BI</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:tableau-icon" className="text-3xl" /> <span className="text-xl font-bold font-mono">Tableau</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="vscode-icons:file-type-reactjs" className="text-3xl" /> <span className="text-xl font-bold font-mono">React</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:laravel" className="text-3xl" /> <span className="text-xl font-bold font-mono">Laravel</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="mdi:robot-outline" className="text-3xl text-neon-pink" /> <span className="text-xl font-bold font-mono">AI Integration</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="carbon:machine-learning-model" className="text-3xl text-neon-blue" /> <span className="text-xl font-bold font-mono">RAG</span></div> },
+    { node: <div className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"><Icon icon="logos:qdrant" className="text-3xl" /> <span className="text-xl font-bold font-mono">Qdrant</span></div> },
+  ];
+
   return (
-    <section 
-      id="home" 
-      ref={sectionRef}
-      className="flex items-center justify-center min-h-screen pt-16 relative overflow-hidden"
-    >
-      {/* ReactBits Threads Background */}
-      {isVisible && (
+    <>
+      <section 
+        id="home" 
+        ref={sectionRef}
+        className="flex items-center justify-center min-h-screen pt-16 relative overflow-hidden"
+      >
+        {/* ReactBits Threads Background */}
+        {isVisible && (
         <div className="absolute inset-0 z-0 md:hidden">
           <Threads 
             color={[0.89, 0.13, 0.98] as any} // #e421fc (neon-purple)
@@ -123,7 +145,7 @@ const Hero: React.FC = () => {
             ref={glitchRef}
           >
             <span className="block">Yong Wern Jie<span className="text-neon-purple">.</span></span>
-            <span className="text-neon-purple neon-text"> &#123;Developer&#125;</span>
+            <span className="text-neon-purple neon-text"> &#123;Data & AI Systems Builder&#125;</span>
           </motion.h1>
           
           <motion.h2
@@ -134,8 +156,8 @@ const Hero: React.FC = () => {
           >
             I build <span className="relative">
               <span className="absolute inset-0 -z-10 h-full w-[125%] -mx-[12.5%] top-[10%] left-0 bg-neon-magenta/10 blur-lg"></span>
-              modern web
-            </span> experiences.
+              production-grade
+            </span> data, analytics, and AI systems.
           </motion.h2>
           
           <motion.p
@@ -144,9 +166,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="text-light/70 max-w-xl mx-auto md:mx-0 mb-8 text-lg"
           >
-            I'm a Computer Science student specializing in Data Engineering at UTM. 
-            Currently, I'm leading development at Nexscholar and working on freelance web projects 
-            that merge technology with seamless user experiences.
+            I’m a final-year Computer Science (Data Engineering) student at UTM, currently building production-grade analytics and reporting systems at Marrybrown while leading full-stack and AI system development at Nexscholar.
           </motion.p>
           
           <motion.div
@@ -185,7 +205,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Futuristic UI elements to complement the threads background */}
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center z-10">
+      <div className="absolute bottom-24 left-0 right-0 flex justify-center z-10">
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -202,9 +222,36 @@ const Hero: React.FC = () => {
       {/* Cyberpunk UI accent elements */}
       <div className="absolute top-20 md:top-28 left-4 md:left-10 w-20 md:w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
       <div className="absolute top-20 md:top-28 left-4 md:left-10 w-px h-20 md:h-32 bg-neon-blue opacity-50 z-[1]"></div>
-      <div className="absolute bottom-10 right-4 md:right-10 w-20 md:w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
-      <div className="absolute bottom-10 right-4 md:right-10 w-px h-20 md:h-32 bg-neon-blue opacity-50 z-[1]"></div>
-    </section>
+      <div className="absolute bottom-24 right-4 md:right-10 w-20 md:w-32 h-px bg-neon-purple opacity-50 z-[1]"></div>
+      <div className="absolute bottom-24 right-4 md:right-10 w-px h-20 md:h-32 bg-neon-blue opacity-50 z-[1]"></div>
+
+      {/* Circular Text in bottom right corner */}
+      <div className="absolute bottom-28 right-6 md:bottom-32 md:right-16 z-20 hidden md:flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+        <CircularText 
+          text="DATA*AI*FULL-STACK*" 
+          onHover="speedUp" 
+          spinDuration={20} 
+          className="transform scale-75 md:scale-[0.85] [&_span]:text-white [&_span]:[text-shadow:2px_0px_0_#00f2fe,-2px_0px_0_#ff0050]"
+        />
+      </div>
+
+      </section>
+
+      {/* Infinte Logo Loop Section (Appears after scrolling down slightly) */}
+      <div className="w-full bg-dark/80 backdrop-blur-md border-y border-neon-purple/20 relative z-20 py-4">
+        <LogoLoop 
+          logos={techLogos}
+          speed={30}
+          direction="left"
+          logoHeight={40}
+          gap={80}
+          pauseOnHover={true}
+          fadeOut={true}
+          fadeOutColor="#0b0b0b"
+          className="py-2"
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const RESUME_URL = 'https://drive.google.com/file/d/1t0YmOis25FBo7683bF-LPX-UDK5vv1XL/view?usp=sharing';
+import { RESUME_URL } from '../constants';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -85,7 +84,7 @@ const Footer: React.FC = () => {
               </a>
             </div>
             <nav className="flex flex-wrap justify-center gap-5 text-xs text-light/60">
-              {['Home', 'About', 'Skills', 'Projects', 'Achievements', 'Contact'].map((item, index) => (
+              {['Home', 'About', 'Experience', 'Skills', 'Projects', 'Achievements', 'Contact'].map((item, index) => (
                 <a 
                   key={index} 
                   href={`#${item.toLowerCase()}`}
@@ -101,7 +100,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="mt-8 border-t border-neon-purple/10 pt-4">
           <p className="text-center text-xs text-light/40 font-cyber">
-            <span className="text-neon-purple">&lt;</span> Designed &amp; Built with <span className="text-neon-magenta animate-pulse">♥</span> by Yong Wern Jie <span className="text-neon-purple">/&gt;</span>
+            <span className="text-neon-purple">&lt;</span> Building Production-Grade Data, Analytics &amp; AI Systems <span className="text-neon-purple">/&gt;</span>
           </p>
         </div>
       </div>
