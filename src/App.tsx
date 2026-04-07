@@ -14,6 +14,7 @@ import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import PortfolioQaWidget from './components/portfolio-qa/PortfolioQaWidget';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -94,6 +95,7 @@ function App() {
           </Routes>
           <Footer />
         </div>
+        <PortfolioQaWidget />
       </div>
     </Router>
   );

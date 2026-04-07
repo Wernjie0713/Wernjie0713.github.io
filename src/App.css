@@ -37,6 +37,15 @@
   }
 }
 
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -20% 0;
+  }
+}
+
 /* Custom CSS that can't be easily done with Tailwind */
 .section-padding {
   padding: 100px 0;

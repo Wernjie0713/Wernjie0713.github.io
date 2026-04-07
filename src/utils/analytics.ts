@@ -47,4 +47,16 @@ export const logSectionView = (sectionName: string) => {
 
 export const logExternalLink = (url: string) => {
   logEvent('External Link', 'Click', url);
-}; 
+};
+
+export const logPortfolioQaOpen = () => {
+  logEvent('Portfolio Q&A', 'Open', 'Widget');
+};
+
+export const logPortfolioQaQuestion = (question: string) => {
+  logEvent('Portfolio Q&A', 'Question Click', question);
+};
+
+export const logPortfolioQaSourceClick = (source: string) => {
+  logEvent('Portfolio Q&A', 'Source Click', source);
+};
