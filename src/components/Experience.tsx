@@ -1,5 +1,7 @@
-import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { useGsapParallax } from '../hooks/useGsapParallax';
+import { useGsapReveal } from '../hooks/useGsapReveal';
+import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap';
 
 interface ExperienceEntry {
   id: number;
@@ -43,11 +45,100 @@ const experience: ExperienceEntry[] = [
 ];
 
 const Experience: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  useGsapReveal(sectionRef);
+  useGsapParallax(sectionRef);
+
+  useGSAP(
+    () => {
+      const scopeElement = sectionRef.current;
+      if (!scopeElement) {
+        return undefined;
+      }
+
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          all: 'all',
+          desktop: '(min-width: 1024px)',
+          reduceMotion: '(prefers-reduced-motion: reduce)',
+        },
+        (context) => {
+          if (context.conditions?.reduceMotion) {
+            return undefined;
+          }
+
+          const featureCard = scopeElement.querySelector<HTMLElement>('[data-experience-feature]');
+          const cards = gsap.utils.toArray<HTMLElement>('[data-experience-card]', scopeElement);
+
+          if (featureCard && context.conditions?.desktop) {
+            gsap.to(featureCard, {
+              yPercent: -10,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: scopeElement,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.1,
+              },
+            });
+          }
+
+          cards.forEach((card, index) => {
+            const tags = gsap.utils.toArray<HTMLElement>('[data-experience-tag]', card);
+
+            gsap.to(card, {
+              yPercent: index % 2 === 0 ? -5 : 6,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.05,
+              },
+            });
+
+            if (tags.length) {
+              ScrollTrigger.create({
+                trigger: card,
+                start: 'top 72%',
+                once: true,
+                onEnter: () => {
+                  gsap.fromTo(
+                    tags,
+                    { autoAlpha: 0, y: 14 },
+                    {
+                      autoAlpha: 1,
+                      y: 0,
+                      duration: 0.36,
+                      stagger: 0.04,
+                      ease: 'power3.out',
+                      overwrite: true,
+                    },
+                  );
+                },
+              });
+            }
+          });
+
+          return undefined;
+        },
+        sectionRef,
+      );
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
   useEffect(() => {
     const grid = gridRef.current;
-    if (!grid) return;
+    if (!grid) {
+      return undefined;
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       const cards = grid.querySelectorAll('.bento-card');
@@ -82,21 +173,19 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-20 md:py-32 relative overflow-hidden bg-primary/80">
+    <section
+      id="experience"
+      ref={sectionRef}
+      className="py-20 md:py-32 relative overflow-hidden bg-primary/80"
+    >
       <div className="absolute inset-0 cyber-grid opacity-15"></div>
-      <div className="absolute top-12 left-1/4 w-64 h-64 bg-neon-blue/10 rounded-full filter blur-[120px]"></div>
-      <div className="absolute bottom-12 right-1/4 w-64 h-64 bg-neon-purple/10 rounded-full filter blur-[120px]"></div>
+      <div data-gsap-parallax="120" data-gsap-parallax-x="-18" className="absolute top-12 left-1/4 w-64 h-64 bg-neon-blue/10 rounded-full filter blur-[120px]"></div>
+      <div data-gsap-parallax="-100" data-gsap-parallax-x="22" className="absolute bottom-12 right-1/4 w-64 h-64 bg-neon-purple/10 rounded-full filter blur-[120px]"></div>
       <div className="absolute inset-y-0 left-[8%] w-px bg-gradient-to-b from-transparent via-neon-blue/40 to-transparent"></div>
       <div className="absolute inset-y-0 right-[10%] w-px bg-gradient-to-b from-transparent via-neon-purple/40 to-transparent"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div data-gsap-reveal="up" className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-10 bg-neon-blue"></div>
             <h2 className="text-3xl md:text-4xl font-bold text-lightest font-cyber">
@@ -105,22 +194,19 @@ const Experience: React.FC = () => {
             <div className="h-px w-10 bg-neon-blue"></div>
           </div>
           <div className="w-28 h-1 bg-gradient-to-r from-neon-purple to-neon-blue mx-auto"></div>
-        </motion.div>
+        </div>
 
         <div ref={gridRef} className="grid lg:grid-cols-[0.9fr,1.1fr] gap-8 items-start relative group">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+          <div
+            data-experience-feature
+            data-gsap-reveal="left"
             className="cyber-card p-6 md:p-8 border border-neon-purple/30 bg-cyber-dark/40 backdrop-blur-sm relative overflow-hidden bento-card rounded-xl"
           >
-            {/* Bento Glow Effects (Mouse Tracking) */}
             <div
               className="absolute inset-0 z-30 pointer-events-none transition-opacity duration-300"
               style={{
                 opacity: 'var(--glow-opacity, 0)',
-                background: `radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 0.15), transparent 40%)`,
+                background: 'radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 0.15), transparent 40%)',
               }}
             />
             <div
@@ -128,63 +214,61 @@ const Experience: React.FC = () => {
               style={{
                 opacity: 'var(--glow-opacity, 0)',
                 padding: '2px',
-                background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 1), transparent 40%)`,
+                background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 1), transparent 40%)',
                 WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                 WebkitMaskComposite: 'xor',
                 maskComposite: 'exclude',
               }}
             />
-            
+
             <div className="relative z-20 text-left">
               <p className="font-cyber text-neon-blue text-sm tracking-[0.3em] uppercase mb-4">
-              Current Roles
-            </p>
-            <h3 className="text-2xl md:text-3xl font-cyber text-lightest leading-tight mb-4">
-              Building internal platforms, analytics systems, and AI product workflows in production environments.
-            </h3>
-            <p className="text-light/70 leading-relaxed mb-6">
-              The current focus is split between business-facing analytics engineering at Marrybrown and
-              production full-stack plus AI system delivery at Nexscholar.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="border border-neon-blue/20 bg-cyber-dark/70 rounded-lg p-4">
-                <div className="text-3xl font-cyber text-neon-blue mb-1">02</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-light/50">Active Roles</div>
-              </div>
-              <div className="border border-neon-purple/20 bg-cyber-dark/70 rounded-lg p-4">
-                <div className="text-3xl font-cyber text-neon-purple mb-1">Data + AI</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-light/50">Delivery Focus</div>
-              </div>
-            </div>
-
-            <div className="space-y-3 text-sm font-mono text-light/70">
-              <p className="border-l-2 border-neon-blue/40 pl-4">
-                Sales and payment analytics, ETL design, validation, and reporting automation.
+                Current Roles
               </p>
-              <p className="border-l-2 border-neon-purple/40 pl-4">
-                Full-stack product delivery, semantic matching, recommendation workflows, and RAG-backed AI features.
+              <h3 className="text-2xl md:text-3xl font-cyber text-lightest leading-tight mb-4">
+                Building internal platforms, analytics systems, and AI product workflows in production environments.
+              </h3>
+              <p className="text-light/70 leading-relaxed mb-6">
+                The current focus is split between business-facing analytics engineering at Marrybrown and
+                production full-stack plus AI system delivery at Nexscholar.
               </p>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="border border-neon-blue/20 bg-cyber-dark/70 rounded-lg p-4">
+                  <div className="text-3xl font-cyber text-neon-blue mb-1">02</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-light/50">Active Roles</div>
+                </div>
+                <div className="border border-neon-purple/20 bg-cyber-dark/70 rounded-lg p-4">
+                  <div className="text-3xl font-cyber text-neon-purple mb-1">Data + AI</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-light/50">Delivery Focus</div>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-sm font-mono text-light/70">
+                <p className="border-l-2 border-neon-blue/40 pl-4">
+                  Sales and payment analytics, ETL design, validation, and reporting automation.
+                </p>
+                <p className="border-l-2 border-neon-purple/40 pl-4">
+                  Full-stack product delivery, semantic matching, recommendation workflows, and RAG-backed AI features.
+                </p>
+              </div>
             </div>
-            </div>
-          </motion.div>
+          </div>
 
           <div className="space-y-6">
             {experience.map((entry, index) => (
-              <motion.article
+              <article
                 key={entry.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                data-experience-card
+                data-gsap-reveal="up"
+                data-gsap-delay={String(index * 0.08)}
                 className="cyber-card border border-neon-purple/30 bg-cyber-dark/40 backdrop-blur-sm relative overflow-hidden bento-card rounded-xl"
               >
-                {/* Bento Glow Effects (Mouse Tracking) */}
                 <div
                   className="absolute inset-0 z-30 pointer-events-none transition-opacity duration-300"
                   style={{
                     opacity: 'var(--glow-opacity, 0)',
-                    background: `radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 0.15), transparent 40%)`,
+                    background: 'radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 0.15), transparent 40%)',
                   }}
                 />
                 <div
@@ -192,7 +276,7 @@ const Experience: React.FC = () => {
                   style={{
                     opacity: 'var(--glow-opacity, 0)',
                     padding: '2px',
-                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 1), transparent 40%)`,
+                    background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(142, 81, 234, 1), transparent 40%)',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                     WebkitMaskComposite: 'xor',
                     maskComposite: 'exclude',
@@ -228,6 +312,7 @@ const Experience: React.FC = () => {
                     {entry.stack.map((item) => (
                       <span
                         key={item}
+                        data-experience-tag
                         className="px-3 py-1.5 rounded text-xs font-mono border border-neon-blue/30 bg-primary/50 text-neon-blue"
                       >
                         {item}
@@ -235,7 +320,7 @@ const Experience: React.FC = () => {
                     ))}
                   </div>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
         </div>

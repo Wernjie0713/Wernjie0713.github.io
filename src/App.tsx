@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import './App.css';
 import { initGA, logPageView } from './utils/analytics';
+import { gsap, useGSAP } from './lib/gsap';
 
 // Component imports
 import Navbar from './components/Navbar';
@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Initialize Google Analytics
@@ -24,22 +25,42 @@ function App() {
     logPageView();
 
     // Simulate loading
-    setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
+
+  useGSAP(
+    () => {
+      if (!loading || !loaderRef.current) {
+        return;
+      }
+
+      gsap.fromTo(
+        loaderRef.current,
+        { autoAlpha: 0, scale: 0.9 },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+        },
+      );
+    },
+    { scope: loaderRef, dependencies: [loading], revertOnUpdate: true },
+  );
 
   if (loading) {
     return (
       <div className="h-screen w-screen flex items-center justify-center bg-primary">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+        <div
+          ref={loaderRef}
           className="text-4xl font-cyber font-bold text-neon-purple neon-text"
         >
           <span className="text-neon-blue">{'<'}</span>WJ<span className="text-neon-blue">{'/>'}</span>
-        </motion.div>
+        </div>
       </div>
     );
   }

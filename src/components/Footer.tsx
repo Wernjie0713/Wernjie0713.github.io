@@ -1,9 +1,12 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { RESUME_URL } from '../constants';
+import { useGsapReveal } from '../hooks/useGsapReveal';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+
+  useGsapReveal(footerRef);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
@@ -12,22 +15,16 @@ const Footer: React.FC = () => {
       const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: offsetTop - 80,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
 
   return (
-    <motion.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="py-8 border-t border-neon-purple/20 relative overflow-hidden"
-    >
+    <footer ref={footerRef} className="py-8 border-t border-neon-purple/20 relative overflow-hidden">
       <div className="absolute inset-0 cyber-grid opacity-10"></div>
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <div data-gsap-reveal="fade" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="text-xl font-bold text-neon-purple neon-text font-cyber">
@@ -84,9 +81,9 @@ const Footer: React.FC = () => {
               </a>
             </div>
             <nav className="flex flex-wrap justify-center gap-5 text-xs text-light/60">
-              {['Home', 'About', 'Experience', 'Skills', 'Projects', 'Achievements', 'Contact'].map((item, index) => (
-                <a 
-                  key={index} 
+              {['Home', 'About', 'Experience', 'Skills', 'Projects', 'Achievements', 'Contact'].map((item) => (
+                <a
+                  key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => handleNavClick(e, `#${item.toLowerCase()}`)}
                   className="hover:text-neon-purple transition-colors font-mono relative group"
@@ -104,8 +101,8 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 
-export default Footer; 
+export default Footer;

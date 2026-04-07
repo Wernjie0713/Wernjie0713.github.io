@@ -1,39 +1,32 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { RESUME_URL } from '../constants';
+import { useGsapHover } from '../hooks/useGsapHover';
+import { useGsapReveal } from '../hooks/useGsapReveal';
 
 const Contact: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGsapReveal(sectionRef);
+  useGsapHover(sectionRef);
+
   return (
-    <section id="contact" className="py-20 md:py-32 relative overflow-hidden">
-      {/* Cyberpunk background elements */}
+    <section id="contact" ref={sectionRef} className="py-20 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 cyber-grid opacity-20"></div>
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-neon-purple/10 rounded-full filter blur-[100px]"></div>
       <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-neon-blue/10 rounded-full filter blur-[80px]"></div>
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div data-gsap-reveal="up" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-lightest mb-4 font-cyber inline-flex items-center gap-2">
             <span className="text-neon-magenta">[</span>
             Connect<span className="text-neon-purple neon-text">::</span>Now
             <span className="text-neon-magenta">]</span>
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-neon-purple to-neon-blue mx-auto"></div>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative z-10"
-          >
+          <div data-gsap-reveal="left" className="relative z-10">
             <div className="absolute -z-10 top-0 left-0 w-full h-full bg-neon-purple/5 transform -skew-y-3"></div>
             <div className="p-1 relative">
               <div className="absolute top-0 left-0 w-20 h-1 bg-neon-purple"></div>
@@ -43,9 +36,7 @@ const Contact: React.FC = () => {
                   Let's Build Something Together
                 </h3>
                 <p className="text-light/70 mb-8">
-                  I'm currently looking for new opportunities to collaborate on projects 
-                  that challenge me and help me grow. Whether you have a question or just want 
-                  to say hi, I'll do my best to get back to you!
+                  I'm currently looking for new opportunities to collaborate on projects that challenge me and help me grow. Whether you have a question or just want to say hi, I'll do my best to get back to you.
                 </p>
                 <div className="space-y-6">
                   <div className="flex items-center">
@@ -74,21 +65,17 @@ const Contact: React.FC = () => {
               <div className="absolute bottom-0 right-0 w-20 h-1 bg-neon-purple"></div>
               <div className="absolute bottom-0 right-0 w-1 h-20 bg-neon-purple"></div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="cyber-card before:bg-gradient-to-r before:from-neon-magenta before:to-neon-blue"
-          >
+          <div data-gsap-reveal="right" data-gsap-delay="0.1" className="cyber-card before:bg-gradient-to-r before:from-neon-magenta before:to-neon-blue">
             <div className="p-8">
               <h3 className="text-xl font-bold text-lightest mb-6 font-cyber">
-                {"<"} Connect<span className="text-neon-purple">_</span>With<span className="text-neon-purple">_</span>Me {"/>"}
+                {'<'} Connect<span className="text-neon-purple">_</span>With<span className="text-neon-purple">_</span>Me {'/>'}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a
+                  data-gsap-hover="1.03"
+                  data-gsap-hover-y="-4"
                   href="https://www.linkedin.com/in/yong-wern-jie-0a5b90261/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,6 +90,8 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
                 <a
+                  data-gsap-hover="1.03"
+                  data-gsap-hover-y="-4"
                   href="https://github.com/wernjie0713"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -117,6 +106,8 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
                 <a
+                  data-gsap-hover="1.03"
+                  data-gsap-hover-y="-4"
                   href="mailto:yongwernjie.2003@gmail.com"
                   className="group relative overflow-hidden p-4 border border-neon-purple/30 rounded-md bg-cyber-dark hover:bg-neon-purple/10 transition-colors duration-300"
                 >
@@ -129,6 +120,8 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
                 <a
+                  data-gsap-hover="1.03"
+                  data-gsap-hover-y="-4"
                   href={RESUME_URL}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -143,6 +136,8 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
                 <a
+                  data-gsap-hover="1.03"
+                  data-gsap-hover-y="-4"
                   href="https://wa.me/601135752400"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -158,11 +153,11 @@ const Contact: React.FC = () => {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Contact; 
+export default Contact;
